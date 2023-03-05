@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/lostinopensrc/homelab-argocd-applicationset.git
+        repoURL: https://github.com/lostinopensrc/homelab-db-applicationset.git
         targetRevision: main
         path: 'tenants/{{tenantid}}'
         helm:
