@@ -1,0 +1,7 @@
+{
+  "tenantid": "cloudnative-pg",
+  "cluster": {
+    "namespace": "cnpg-system",
+    "address": "https://kubernetes.default.svc"
+  }
+}

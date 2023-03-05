@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: homelab-db-tenant
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/lostinopensrc/homelab-db-applicationset.git
+      revision: main
+      files:
+      - path: "tenants-discovery/tenants/**/config.json"
+  template:
+    metadata:
+      name: '{{tenantid}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/lostinopensrc/homelab-argocd-applicationset.git
+        targetRevision: main
+        path: 'tenants/{{tenantid}}'
+        helm:
+          valueFiles:
+            - 'values.yaml'
+      destination:
+        server: '{{cluster.address}}'
+        namespace: '{{cluster.namespace}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
