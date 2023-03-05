@@ -22,7 +22,8 @@ jobs:
     #   run: |
     #     echo ${KUBECONFIG} | base64 --decode > kubeconfig.yaml
 
-    - name: Create PG Cluster
+    - name: Create Namespace and deploy PG Cluster
       run: |
         export KUBECONFIG=$HOME/.kube/config
+        kubectl create ns homelab-pg
         kubectl apply -f pg-cluster/homelab-pg.yaml
